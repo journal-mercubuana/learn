@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Learn — Universitas Mercu Buana</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:     #0a1628;
+      --navy-mid: #162240;
+      --gold:     #c8922a;
+      --gold-lt:  #f0c060;
+      --cream:    #faf8f3;
+      --white:    #ffffff;
+      --gray-100: #f2ede4;
+      --gray-300: #c9c3b8;
+      --gray-500: #857e75;
+      --gray-700: #4a443d;
+      --text:     #1a1410;
+      --radius:   12px;
+      --shadow:   0 4px 24px rgba(10,22,40,0.10);
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--navy);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    .nav-logo {
+      width: 36px;
+      height: 36px;
+      background: var(--gold);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--navy);
+    }
+    .nav-brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+    .nav-brand-text span:first-child {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 0.01em;
+    }
+    .nav-brand-text span:last-child {
+      font-size: 11px;
+      color: var(--gold-lt);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: rgba(255,255,255,0.65);
+      text-decoration: none;
+      font-size: 14px;
+      padding: 6px 14px;
+      border-radius: 8px;
+      transition: background 0.18s, color 0.18s;
+    }
+    .nav-links a:hover { background: rgba(255,255,255,0.08); color: #fff; }
+    .nav-links a.active { color: var(--gold-lt); background: rgba(200,146,42,0.15); }
+    .nav-cta {
+      background: var(--gold);
+      color: var(--navy) !important;
+      font-weight: 600 !important;
+      padding: 8px 20px !important;
+    }
+    .nav-cta:hover { background: var(--gold-lt) !important; color: var(--navy) !important; }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--navy);
+      padding: 72px 2rem 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -120px; right: -120px;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(200,146,42,0.18) 0%, transparent 70%);
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; left: -80px;
+      width: 360px; height: 360px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(200,146,42,0.10) 0%, transparent 70%);
+    }
+    .hero-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(200,146,42,0.2);
+      border: 1px solid rgba(200,146,42,0.4);
+      color: var(--gold-lt);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--gold-lt);
+    }
+    .hero-sub {
+      font-size: 17px;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.7;
+      max-width: 560px;
+      margin-bottom: 36px;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: var(--gold);
+      color: var(--navy);
+      font-weight: 700;
+      font-size: 15px;
+      padding: 12px 28px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.18s, transform 0.14s;
+    }
+    .btn-primary:hover { background: var(--gold-lt); transform: translateY(-1px); }
+    .btn-outline {
+      background: transparent;
+      color: rgba(255,255,255,0.85);
+      font-size: 15px;
+      padding: 12px 28px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.25);
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: border-color 0.18s, color 0.18s;
+    }
+    .btn-outline:hover { border-color: rgba(255,255,255,0.6); color: #fff; }
+
+    /* ── STATS ── */
+    .stats-bar {
+      background: var(--navy-mid);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 24px 2rem;
+    }
+    .stats-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      gap: 0;
+      flex-wrap: wrap;
+    }
+    .stat-item {
+      flex: 1;
+      min-width: 130px;
+      padding: 0 28px 0 0;
+      border-right: 1px solid rgba(255,255,255,0.08);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-item:first-child { padding-left: 0; }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--gold-lt);
+    }
+    .stat-label {
+      font-size: 12px;
+      color: rgba(255,255,255,0.45);
+      letter-spacing: 0.04em;
+      margin-top: 2px;
+    }
+
+    /* ── MAIN ── */
+    .main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 52px 2rem 80px;
+    }
+
+    /* ── SEARCH ── */
+    .search-wrap {
+      position: relative;
+      margin-bottom: 40px;
+    }
+    .search-icon {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--gray-500);
+    }
+    .search-input {
+      width: 100%;
+      height: 52px;
+      padding: 0 140px 0 48px;
+      border: 1.5px solid var(--gray-300);
+      border-radius: 14px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      background: var(--white);
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.18s, box-shadow 0.18s;
+    }
+    .search-input::placeholder { color: var(--gray-500); }
+    .search-input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(200,146,42,0.15); }
+    .search-btn {
+      position: absolute;
+      right: 6px;
+      top: 6px;
+      height: 40px;
+      padding: 0 20px;
+      background: var(--navy);
+      color: var(--white);
+      border: none;
+      border-radius: 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.18s;
+    }
+    .search-btn:hover { background: var(--navy-mid); }
+
+    /* ── SECTION HEADER ── */
+    .sec-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .sec-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 700;
+    }
+    .sec-link {
+      font-size: 13px;
+      color: var(--gold);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .sec-link:hover { text-decoration: underline; }
+
+    /* ── CATEGORY PILLS ── */
+    .cats {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+    .cat-pill {
+      padding: 7px 18px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      border: 1.5px solid transparent;
+      transition: all 0.16s;
+      background: var(--white);
+      color: var(--gray-700);
+      border-color: var(--gray-300);
+    }
+    .cat-pill:hover { border-color: var(--gold); color: var(--gold); }
+    .cat-pill.active { background: var(--navy); color: var(--white); border-color: var(--navy); }
+
+    /* ── COURSE GRID ── */
+    .course-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 20px;
+      margin-bottom: 52px;
+    }
+    .course-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+    }
+    .course-card:hover { transform: translateY(-4px); box-shadow: 0 10px 32px rgba(10,22,40,0.14); }
+    .card-thumb {
+      height: 140px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      position: relative;
+    }
+    .card-thumb.navy  { background: var(--navy); }
+    .card-thumb.gold  { background: #7c4b00; }
+    .card-thumb.teal  { background: #0a3d35; }
+    .card-thumb.rose  { background: #4a1628; }
+    .card-thumb.blue  { background: #0d2d5a; }
+    .card-thumb.green { background: #1a3d0f; }
+    .card-badge {
+      position: absolute;
+      top: 10px;
+      left: 12px;
+      background: rgba(0,0,0,0.5);
+      color: rgba(255,255,255,0.9);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 6px;
+    }
+    .card-body { padding: 16px 18px 20px; flex: 1; display: flex; flex-direction: column; }
+    .card-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .card-tag {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .card-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--gray-300); }
+    .card-level { font-size: 11px; color: var(--gray-500); }
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.35;
+      margin-bottom: 8px;
+    }
+    .card-desc {
+      font-size: 13px;
+      color: var(--gray-500);
+      line-height: 1.5;
+      flex: 1;
+      margin-bottom: 14px;
+    }
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--gray-100);
+      padding-top: 12px;
+    }
+    .card-instructor {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .avatar {
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      background: var(--navy);
+      color: var(--gold-lt);
+      font-size: 11px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .instructor-name { font-size: 12px; color: var(--gray-700); }
+    .card-hours {
+      font-size: 12px;
+      color: var(--gray-500);
+    }
+    .card-stars {
+      font-size: 12px;
+      color: var(--gold);
+    }
+
+    /* ── FEATURED STRIP ── */
+    .featured {
+      background: var(--navy);
+      border-radius: 16px;
+      padding: 32px 36px;
+      margin-bottom: 52px;
+      display: flex;
+      gap: 32px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .featured-emoji { font-size: 60px; }
+    .featured-text { flex: 1; min-width: 200px; }
+    .featured-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--gold-lt);
+      margin-bottom: 8px;
+    }
+    .featured-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.25;
+      margin-bottom: 8px;
+    }
+    .featured-desc {
+      font-size: 14px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.5;
+    }
+    .featured-cta { flex-shrink: 0; }
+
+    /* ── PATHS ── */
+    .path-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 14px;
+      margin-bottom: 52px;
+    }
+    .path-card {
+      background: var(--white);
+      border: 1.5px solid var(--gray-100);
+      border-radius: 12px;
+      padding: 20px 18px;
+      text-align: center;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.18s, transform 0.18s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    .path-card:hover { border-color: var(--gold); transform: translateY(-2px); }
+    .path-icon { font-size: 30px; }
+    .path-label { font-size: 13px; font-weight: 600; }
+    .path-count { font-size: 11px; color: var(--gray-500); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy);
+      color: rgba(255,255,255,0.5);
+      padding: 40px 2rem 28px;
+    }
+    .footer-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 28px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .footer-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      color: var(--white);
+      margin-bottom: 6px;
+    }
+    .footer-tagline { font-size: 13px; }
+    .footer-cols {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .footer-col h4 {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--gold-lt);
+      margin-bottom: 12px;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .footer-col a { font-size: 13px; color: rgba(255,255,255,0.5); text-decoration: none; }
+    .footer-col a:hover { color: var(--white); }
+    .footer-bottom {
+      max-width: 960px;
+      margin: 20px auto 0;
+      font-size: 12px;
+      text-align: center;
+    }
+
+    @media (max-width: 640px) {
+      .stats-inner { gap: 20px; }
+      .stat-item { border-right: none; padding: 0; }
+      .nav-links { display: none; }
+      .featured { padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-brand" href="#">
+    <div class="nav-logo">M</div>
+    <div class="nav-brand-text">
+      <span>Mercu Buana</span>
+      <span>Learning Portal</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#" class="active">Beranda</a></li>
+    <li><a href="#">Kursus</a></li>
+    <li><a href="#">Jalur Belajar</a></li>
+    <li><a href="#">Sertifikasi</a></li>
+    <li><a href="#" class="nav-cta">Masuk</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">✦ Platform Pembelajaran Resmi</div>
+    <h1>Belajar Tanpa Batas,<br><em>Raih Masa Depanmu.</em></h1>
+    <p class="hero-sub">
+      Akses ratusan kursus berkualitas, materi kuliah, dan sumber belajar
+      dari dosen terbaik Universitas Mercu Buana — kapan saja, di mana saja.
+    </p>
+    <div class="hero-actions">
+      <a href="#" class="btn-primary">Mulai Belajar</a>
+      <a href="#" class="btn-outline">Jelajahi Kursus</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <div class="stat-num">240+</div>
+      <div class="stat-label">Kursus tersedia</div>
+    </div>
+    <div class="stat-item" style="padding-left:28px;">
+      <div class="stat-num">18K+</div>
+      <div class="stat-label">Mahasiswa aktif</div>
+    </div>
+    <div class="stat-item" style="padding-left:28px;">
+      <div class="stat-num">120</div>
+      <div class="stat-label">Instruktur berpengalaman</div>
+    </div>
+    <div class="stat-item" style="padding-left:28px;">
+      <div class="stat-num">98%</div>
+      <div class="stat-label">Tingkat kepuasan</div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- SEARCH -->
+  <div class="search-wrap">
+    <svg class="search-icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+    </svg>
+    <input class="search-input" type="text" placeholder="Cari kursus, topik, atau instruktur…"/>
+    <button class="search-btn">Cari</button>
+  </div>
+
+  <!-- CATEGORIES -->
+  <div class="sec-header">
+    <h2 class="sec-title">Kategori</h2>
+  </div>
+  <div class="cats">
+    <button class="cat-pill active">Semua</button>
+    <button class="cat-pill">Teknik Informatika</button>
+    <button class="cat-pill">Ekonomi & Bisnis</button>
+    <button class="cat-pill">Desain & Seni</button>
+    <button class="cat-pill">Psikologi</button>
+    <button class="cat-pill">Hukum</button>
+    <button class="cat-pill">Komunikasi</button>
+    <button class="cat-pill">Arsitektur</button>
+  </div>
+
+  <!-- FEATURED BANNER -->
+  <div class="featured">
+    <div class="featured-emoji">🎓</div>
+    <div class="featured-text">
+      <div class="featured-eyebrow">Program unggulan</div>
+      <div class="featured-title">Sertifikasi Digital Marketing<br>untuk Mahasiswa Aktif</div>
+      <div class="featured-desc">Kuasai strategi pemasaran digital terkini dan dapatkan sertifikat resmi yang diakui industri.</div>
+    </div>
+    <div class="featured-cta">
+      <a href="#" class="btn-primary">Daftar Sekarang</a>
+    </div>
+  </div>
+
+  <!-- COURSES -->
+  <div class="sec-header">
+    <h2 class="sec-title">Kursus Populer</h2>
+    <a href="#" class="sec-link">Lihat semua →</a>
+  </div>
+  <div class="course-grid">
+
+    <a class="course-card" href="course1.html">
+      <div class="card-thumb navy">
+        <span>💻</span>
+        <span class="card-badge">Terpopuler</span>
+      </div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-tag">Informatika</span>
+          <div class="card-dot"></div>
+          <span class="card-level">Pemula</span>
+        </div>
+        <div class="card-title">Pemrograman Web dengan HTML, CSS & JavaScript</div>
+        <div class="card-desc">Bangun website modern dari nol dengan teknologi web paling relevan saat ini.</div>
+        <div class="card-footer">
+          <div class="card-instructor">
+            <div class="avatar">DS</div>
+            <span class="instructor-name">Dr. Santoso</span>
+          </div>
+          <div>
+            <div class="card-stars">★★★★★</div>
+            <div class="card-hours">24 jam · 42 video</div>
+          </div>
+        </div>
+      </div>
+    </a>
+
+    <a class="course-card" href="course2.html">
+      <div class="card-thumb gold">
+        <span>📊</span>
+        <span class="card-badge">Baru</span>
+      </div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-tag">Bisnis</span>
+          <div class="card-dot"></div>
+          <span class="card-level">Menengah</span>
+        </div>
+        <div class="card-title">Analisis Data Bisnis dengan Excel & Power BI</div>
+        <div class="card-desc">Ubah data mentah menjadi keputusan bisnis yang cerdas dan berbasis bukti.</div>
+        <div class="card-footer">
+          <div class="card-instructor">
+            <div class="avatar" style="background:#4a2800;color:#f0c060;">RW</div>
+            <span class="instructor-name">Rini Wijaya, M.M.</span>
+          </div>
+          <div>
+            <div class="card-stars">★★★★☆</div>
+            <div class="card-hours">18 jam · 31 video</div>
+          </div>
+        </div>
+      </div>
+    </a>
+
+    <a class="course-card" href="course3.html">
+      <div class="card-thumb teal">
+        <span>🤖</span>
+        <span class="card-badge">Unggulan</span>
+      </div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-tag">Informatika</span>
+          <div class="card-dot"></div>
+          <span class="card-level">Lanjut</span>
+        </div>
+        <div class="card-title">Machine Learning & Kecerdasan Buatan Praktis</div>
+        <div class="card-desc">Pelajari algoritma ML terkini dan terapkan dalam proyek nyata menggunakan Python.</div>
+        <div class="card-footer">
+          <div class="card-instructor">
+            <div class="avatar" style="background:#042820;color:#5DCAA5;">AH</div>
+            <span class="instructor-name">Prof. Ahmad H.</span>
+          </div>
+          <div>
+            <div class="card-stars">★★★★★</div>
+            <div class="card-hours">36 jam · 58 video</div>
+          </div>
+        </div>
+      </div>
+    </a>
+
+    <a class="course-card" href="course4.html">
+      <div class="card-thumb rose">
+        <span>🎨</span>
+      </div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-tag">Desain</span>
+          <div class="card-dot"></div>
+          <span class="card-level">Pemula</span>
+        </div>
+        <div class="card-title">UI/UX Design: Dari Konsep ke Prototipe</div>
+        <div class="card-desc">Kuasai Figma dan prinsip desain antarmuka untuk menciptakan produk digital yang intuitif.</div>
+        <div class="card-footer">
+          <div class="card-instructor">
+            <div class="avatar" style="background:#300a1a;color:#ED93B1;">LP</div>
+            <span class="instructor-name">Laras Putri, S.Ds.</span>
+          </div>
+          <div>
+            <div class="card-stars">★★★★★</div>
+            <div class="card-hours">20 jam · 35 video</div>
+          </div>
+        </div>
+      </div>
+    </a>
+
+    <a class="course-card" href="course5.html">
+      <div class="card-thumb blue">
+        <span>⚖️</span>
+      </div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-tag">Hukum</span>
+          <div class="card-dot"></div>
+          <span class="card-level">Menengah</span>
+        </div>
+        <div class="card-title">Hukum Bisnis & Kontrak Komersial Indonesia</div>
+        <div class="card-desc">Pahami regulasi bisnis, perjanjian, dan aspek hukum yang wajib diketahui pengusaha.</div>
+        <div class="card-footer">
+          <div class="card-instructor">
+            <div class="avatar" style="background:#041a38;color:#85B7EB;">BK</div>
+            <span class="instructor-name">Budi Kurniawan, S.H.</span>
+          </div>
+          <div>
+            <div class="card-stars">★★★★☆</div>
+            <div class="card-hours">15 jam · 28 video</div>
+          </div>
+        </div>
+      </div>
+    </a>
+
+    <a class="course-card" href="course6.html">
+      <div class="card-thumb green">
+        <span>🧠</span>
+      </div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-tag">Psikologi</span>
+          <div class="card-dot"></div>
+          <span class="card-level">Pemula</span>
+        </div>
+        <div class="card-title">Psikologi Industri & Organisasi Modern</div>
+        <div class="card-desc">Memahami perilaku manusia di tempat kerja untuk menciptakan lingkungan yang produktif.</div>
+        <div class="card-footer">
+          <div class="card-instructor">
+            <div class="avatar" style="background:#0a1e05;color:#97C459;">NR</div>
+            <span class="instructor-name">Dr. Nisa Rahmawati</span>
+          </div>
+          <div>
+            <div class="card-stars">★★★★★</div>
+            <div class="card-hours">22 jam · 40 video</div>
+          </div>
+        </div>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- LEARNING PATHS -->
+  <div class="sec-header">
+    <h2 class="sec-title">Jalur Belajar</h2>
+    <a href="#" class="sec-link">Lihat semua →</a>
+  </div>
+  <div class="path-grid">
+    <a class="path-card" href="#">
+      <div class="path-icon">🖥️</div>
+      <div class="path-label">Full-Stack Developer</div>
+      <div class="path-count">8 kursus · 6 bulan</div>
+    </a>
+    <a class="path-card" href="#">
+      <div class="path-icon">📈</div>
+      <div class="path-label">Digital Marketer</div>
+      <div class="path-count">5 kursus · 4 bulan</div>
+    </a>
+    <a class="path-card" href="#">
+      <div class="path-icon">🏗️</div>
+      <div class="path-label">Data Analyst</div>
+      <div class="path-count">6 kursus · 5 bulan</div>
+    </a>
+    <a class="path-card" href="#">
+      <div class="path-icon">🎯</div>
+      <div class="path-label">UX Researcher</div>
+      <div class="path-count">4 kursus · 3 bulan</div>
+    </a>
+    <a class="path-card" href="#">
+      <div class="path-icon">💼</div>
+      <div class="path-label">Entrepreneur</div>
+      <div class="path-count">7 kursus · 5 bulan</div>
+    </a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">Mercu Buana Learn</div>
+      <div class="footer-tagline">Platform pembelajaran resmi<br>Universitas Mercu Buana</div>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h4>Belajar</h4>
+        <ul>
+          <li><a href="#">Semua Kursus</a></li>
+          <li><a href="#">Jalur Belajar</a></li>
+          <li><a href="#">Sertifikasi</a></li>
+          <li><a href="#">Webinar</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Institusi</h4>
+        <ul>
+          <li><a href="#">Tentang UMB</a></li>
+          <li><a href="#">Instruktur</a></li>
+          <li><a href="#">Kemitraan</a></li>
+          <li><a href="#">Kontak</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Dukungan</h4>
+        <ul>
+          <li><a href="#">Bantuan</a></li>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Kebijakan Privasi</a></li>
+          <li><a href="#">Syarat & Ketentuan</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © 2025 Universitas Mercu Buana — Journal &amp; Learning Portal. Hak cipta dilindungi.
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.cat-pill').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.cat-pill').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>

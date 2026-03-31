@@ -1,0 +1,9 @@
+# robots.txt — Mercu Buana Learning Portal
+# https://journal-mercubuana.github.io/learn/
+
+# Izinkan semua mesin pencari mengakses seluruh situs
+User-agent: *
+Allow: /
+
+# Lokasi sitemap
+Sitemap: https://journal-mercubuana.github.io/learn/sitemap.xml

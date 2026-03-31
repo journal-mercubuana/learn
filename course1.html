@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pemrograman Web — Mercu Buana Learn</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --navy:#0a1628;--navy-mid:#162240;--gold:#c8922a;--gold-lt:#f0c060;
+      --cream:#faf8f3;--white:#ffffff;--gray-100:#f2ede4;--gray-200:#e8e2d8;
+      --gray-300:#c9c3b8;--gray-500:#857e75;--gray-700:#4a443d;--text:#1a1410;
+      --radius:12px;--shadow:0 4px 24px rgba(10,22,40,0.10);
+    }
+    body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);min-height:100vh}
+    /* NAV */
+    nav{background:var(--navy);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:100}
+    .nav-brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+    .nav-logo{width:36px;height:36px;background:var(--gold);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:700;font-size:18px;color:var(--navy)}
+    .nav-brand-text{display:flex;flex-direction:column;line-height:1.1}
+    .nav-brand-text span:first-child{font-size:15px;font-weight:700;color:#fff;letter-spacing:.01em}
+    .nav-brand-text span:last-child{font-size:11px;color:var(--gold-lt);letter-spacing:.06em;text-transform:uppercase}
+    .nav-back{color:rgba(255,255,255,.65);text-decoration:none;font-size:14px;display:flex;align-items:center;gap:6px;padding:6px 14px;border-radius:8px;transition:.18s}
+    .nav-back:hover{background:rgba(255,255,255,.08);color:#fff}
+    /* HERO */
+    .course-hero{background:var(--navy);padding:52px 2rem 0;position:relative;overflow:hidden}
+    .course-hero::before{content:'';position:absolute;top:-100px;right:-100px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(200,146,42,.18) 0%,transparent 70%)}
+    .hero-inner{max-width:960px;margin:0 auto;display:grid;grid-template-columns:1fr 340px;gap:48px;align-items:start}
+    .breadcrumb{font-size:12px;color:rgba(255,255,255,.45);margin-bottom:16px}
+    .breadcrumb a{color:var(--gold-lt);text-decoration:none}
+    .breadcrumb a:hover{text-decoration:underline}
+    .course-tag{display:inline-block;background:rgba(200,146,42,.2);border:1px solid rgba(200,146,42,.4);color:var(--gold-lt);font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:4px 12px;border-radius:20px;margin-bottom:16px}
+    .course-hero h1{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:700;color:#fff;line-height:1.2;margin-bottom:16px}
+    .course-hero p{font-size:15px;color:rgba(255,255,255,.65);line-height:1.7;margin-bottom:20px}
+    .meta-row{display:flex;flex-wrap:wrap;gap:16px;margin-bottom:24px}
+    .meta-item{display:flex;align-items:center;gap:6px;font-size:13px;color:rgba(255,255,255,.6)}
+    .meta-item svg{opacity:.7}
+    .stars-row{display:flex;align-items:center;gap:8px;margin-bottom:24px}
+    .stars{color:#f0c060;font-size:16px}
+    .rating-num{font-size:18px;font-weight:700;color:#fff}
+    .rating-count{font-size:13px;color:rgba(255,255,255,.5)}
+    /* STICKY CARD */
+    .enroll-card{background:#fff;border-radius:16px;padding:24px;position:sticky;top:80px;box-shadow:0 8px 40px rgba(10,22,40,.2)}
+    .enroll-thumb{background:var(--navy);border-radius:10px;height:160px;display:flex;align-items:center;justify-content:center;font-size:60px;margin-bottom:16px}
+    .enroll-price{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--navy);margin-bottom:4px}
+    .enroll-price span{font-size:14px;font-weight:400;color:var(--gray-500);text-decoration:line-through}
+    .enroll-badge{display:inline-block;background:#fff3cd;color:#856404;font-size:11px;font-weight:700;padding:3px 10px;border-radius:6px;margin-bottom:16px}
+    .btn-enroll{width:100%;background:var(--gold);color:var(--navy);font-weight:700;font-size:16px;padding:14px;border-radius:10px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;transition:.18s;margin-bottom:10px}
+    .btn-enroll:hover{background:var(--gold-lt)}
+    .btn-wishlist{width:100%;background:transparent;color:var(--navy);font-size:14px;padding:11px;border-radius:10px;border:1.5px solid var(--gray-300);cursor:pointer;font-family:'DM Sans',sans-serif;transition:.18s}
+    .btn-wishlist:hover{border-color:var(--gold);color:var(--gold)}
+    .includes{margin-top:18px}
+    .includes h4{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--gray-500);margin-bottom:10px}
+    .include-item{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--gray-700);margin-bottom:6px}
+    /* CONTENT AREA */
+    .content-wrap{max-width:960px;margin:0 auto;padding:40px 2rem 80px;display:grid;grid-template-columns:1fr 340px;gap:48px}
+    .content-main{}
+    .section-block{background:#fff;border-radius:var(--radius);padding:28px;margin-bottom:20px;box-shadow:var(--shadow)}
+    .section-block h2{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;margin-bottom:16px}
+    .learn-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .learn-item{display:flex;align-items:flex-start;gap:8px;font-size:13px;line-height:1.5}
+    .check{color:var(--gold);font-size:16px;flex-shrink:0;margin-top:1px}
+    /* CURRICULUM */
+    .module{border:1px solid var(--gray-200);border-radius:10px;margin-bottom:10px;overflow:hidden}
+    .module-header{background:var(--gray-100);padding:14px 18px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;user-select:none}
+    .module-title{font-weight:600;font-size:14px}
+    .module-meta{font-size:12px;color:var(--gray-500)}
+    .module-lessons{padding:0}
+    .lesson{display:flex;align-items:center;gap:12px;padding:10px 18px;border-top:1px solid var(--gray-200);font-size:13px}
+    .lesson-icon{width:28px;height:28px;border-radius:6px;background:var(--gray-100);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+    .lesson-title{flex:1}
+    .lesson-dur{font-size:11px;color:var(--gray-500)}
+    .lesson.preview .lesson-title{color:var(--gold)}
+    /* INSTRUCTOR */
+    .instructor-card{display:flex;gap:16px;align-items:flex-start}
+    .inst-avatar{width:64px;height:64px;border-radius:50%;background:var(--navy);color:var(--gold-lt);font-size:20px;font-weight:700;font-family:'Playfair Display',serif;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .inst-name{font-size:18px;font-weight:700;font-family:'Playfair Display',serif;margin-bottom:2px}
+    .inst-title{font-size:13px;color:var(--gray-500);margin-bottom:10px}
+    .inst-stats{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:12px}
+    .inst-stat{font-size:12px;color:var(--gray-700)}
+    .inst-stat strong{color:var(--navy);font-weight:700}
+    .inst-bio{font-size:14px;line-height:1.7;color:var(--gray-700)}
+    /* REVIEWS */
+    .review-summary{display:flex;gap:24px;align-items:center;margin-bottom:24px}
+    .big-rating{text-align:center}
+    .big-num{font-size:56px;font-weight:700;font-family:'Playfair Display',serif;color:var(--navy);line-height:1}
+    .big-stars{color:var(--gold);font-size:20px;margin:4px 0}
+    .big-label{font-size:12px;color:var(--gray-500)}
+    .bars{flex:1}
+    .bar-row{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+    .bar-label{font-size:12px;color:var(--gray-500);width:28px;text-align:right}
+    .bar-track{flex:1;height:6px;background:var(--gray-200);border-radius:3px;overflow:hidden}
+    .bar-fill{height:100%;background:var(--gold);border-radius:3px}
+    .review-card{border-top:1px solid var(--gray-200);padding:16px 0}
+    .review-header{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+    .rev-avatar{width:36px;height:36px;border-radius:50%;background:var(--navy-mid);color:var(--gold-lt);font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .rev-name{font-weight:600;font-size:14px}
+    .rev-date{font-size:11px;color:var(--gray-500)}
+    .rev-stars{color:var(--gold);font-size:13px;margin-bottom:6px}
+    .rev-text{font-size:13px;line-height:1.6;color:var(--gray-700)}
+    /* FOOTER */
+    footer{background:var(--navy);color:rgba(255,255,255,.5);padding:28px 2rem;text-align:center;font-size:13px}
+    @media(max-width:720px){
+      .hero-inner{grid-template-columns:1fr}
+      .enroll-card{display:none}
+      .content-wrap{grid-template-columns:1fr}
+      .learn-grid{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+<nav>
+  <a class="nav-brand" href="index.html">
+    <div class="nav-logo">M</div>
+    <div class="nav-brand-text"><span>Mercu Buana</span><span>Learning Portal</span></div>
+  </a>
+  <a class="nav-back" href="index.html">← Kembali ke Beranda</a>
+</nav>
+
+<section class="course-hero">
+  <div class="hero-inner">
+    <div>
+      <div class="breadcrumb"><a href="index.html">Beranda</a> / <a href="#">Teknik Informatika</a> / Pemrograman Web</div>
+      <div class="course-tag">Teknik Informatika</div>
+      <h1>Pemrograman Web dengan HTML, CSS & JavaScript</h1>
+      <p>Bangun website modern dari nol. Kuasai tiga pilar utama web development dan ciptakan halaman interaktif yang responsif, cepat, dan elegan menggunakan teknologi paling relevan saat ini.</p>
+      <div class="stars-row">
+        <span class="stars">★★★★★</span>
+        <span class="rating-num">4.9</span>
+        <span class="rating-count">(1.842 ulasan · 5.300+ mahasiswa)</span>
+      </div>
+      <div class="meta-row">
+        <div class="meta-item">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          24 jam konten video
+        </div>
+        <div class="meta-item">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg>
+          42 video pelajaran
+        </div>
+        <div class="meta-item">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+          Pemula — tidak perlu pengalaman
+        </div>
+        <div class="meta-item">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/></svg>
+          Sertifikat penyelesaian
+        </div>
+      </div>
+      <div style="padding-bottom:40px;font-size:13px;color:rgba(255,255,255,.5)">Dibuat oleh <span style="color:var(--gold-lt);font-weight:600">Dr. Santoso, M.Kom.</span> · Diperbarui Januari 2025</div>
+    </div>
+    <div>
+      <div class="enroll-card">
+        <div class="enroll-thumb">💻</div>
+        <div class="enroll-price">Gratis <span>Rp 350.000</span></div>
+        <div class="enroll-badge">🎉 Akses penuh untuk mahasiswa UMB</div>
+        <button class="btn-enroll">Mulai Belajar Sekarang</button>
+        <button class="btn-wishlist">+ Tambah ke Wishlist</button>
+        <div class="includes">
+          <h4>Kursus ini mencakup</h4>
+          <div class="include-item">🎬 24 jam video HD on-demand</div>
+          <div class="include-item">📁 15 project file & source code</div>
+          <div class="include-item">📝 5 kuis & latihan interaktif</div>
+          <div class="include-item">🏆 Sertifikat penyelesaian resmi</div>
+          <div class="include-item">♾️ Akses seumur hidup</div>
+          <div class="include-item">📱 Akses mobile & desktop</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="content-wrap">
+  <div class="content-main">
+
+    <!-- YANG DIPELAJARI -->
+    <div class="section-block">
+      <h2>Yang Akan Kamu Pelajari</h2>
+      <div class="learn-grid">
+        <div class="learn-item"><span class="check">✓</span><span>Memahami struktur HTML5 secara mendalam</span></div>
+        <div class="learn-item"><span class="check">✓</span><span>Styling modern dengan CSS3 & Flexbox/Grid</span></div>
+        <div class="learn-item"><span class="check">✓</span><span>Membuat website responsif di semua perangkat</span></div>
+        <div class="learn-item"><span class="check">✓</span><span>JavaScript ES6+ dan DOM manipulation</span></div>
+        <div class="learn-item"><span class="check">✓</span><span>Animasi CSS dan transisi yang halus</span></div>
+        <div class="learn-item"><span class="check">✓</span><span>Fetch API dan integrasi REST API</span></div>
+        <div class="learn-item"><span class="check">✓</span><span>Deploy website ke GitHub Pages & Netlify</span></div>
+        <div class="learn-item"><span class="check">✓</span><span>Best practices & clean code</span></div>
+      </div>
+    </div>
+
+    <!-- KURIKULUM -->
+    <div class="section-block">
+      <h2>Kurikulum Kursus</h2>
+      <p style="font-size:13px;color:var(--gray-500);margin-bottom:20px">6 modul · 42 pelajaran · 24 jam total</p>
+
+      <div class="module">
+        <div class="module-header"><span class="module-title">Modul 1: Pengenalan & Setup Lingkungan</span><span class="module-meta">6 pelajaran · 2j 15m</span></div>
+        <div class="module-lessons">
+          <div class="lesson preview"><div class="lesson-icon">▶</div><span class="lesson-title">Intro: Apa itu Web Development? (Preview Gratis)</span><span class="lesson-dur">12 mnt</span></div>
+          <div class="lesson preview"><div class="lesson-icon">▶</div><span class="lesson-title">Instalasi VS Code & ekstensi wajib (Preview Gratis)</span><span class="lesson-dur">18 mnt</span></div>
+          <div class="lesson"><div class="lesson-icon">▶</div><span class="lesson-title">Cara kerja browser & HTTP</span><span class="lesson-dur">22 mnt</span></div>
+          <div class="lesson"><div class="lesson-icon">▶</div><span class="lesson-title">Struktur folder proyek profesional</span><span class="lesson-dur">15 mnt</span></div>
+          <div class="lesson"><div class="lesson-icon">📝</div><span class="lesson-title">Kuis: Dasar-dasar Web</span><span class="lesson-dur">10 mnt</span></div>
+        </div>
+      </div>
+
+      <div class="module">
+        <div class="module-header"><span class="module-title">Modul 2: HTML5 — Fondasi Web</span><span class="module-meta">8 pelajaran · 4j 30m</span></div>
+        <div class="module-lessons">
+          <div class="lesson"><div class="lesson-icon">▶</div><span class="lesson-title">Tag dasar & struktur dokumen HTML</span><span class="lesson-dur">28 mnt</span></div>
+          <div class="lesson"><div class="lesson-icon">▶</div><span class="lesson-title">Semantic HTML5: header, nav, main, section</span><span class="lesson-dur">35 mnt</span></div>
+          <div class="lesson"><div class="lesson-icon">▶</div><span class="lesson-title">Formulir & input HTML lengkap</span><span class="lesson-dur">42 mnt</span></div>
+          <div class="lesson"><div class="lesson-icon">▶</div><span class="lesson-title">Tabel, list, dan multimedia</span><span class="lesson-dur">30 mnt</span></div>
+          <div class="lesson"><div class="lesson-icon">🏗️</div><span class="lesson-title">Project: Halaman Profil Pribadi</span><span class="lesson-dur">60 mnt</span></div>
+        </div>
+      </div>
+
+      <div class="module">
+        <div class="module-header"><span class="module-title">Modul 3: CSS3 — Desain & Tata Letak</span><span class="module-meta">9 pelajaran · 5j 45m</span></div>
+        <div class="module-lessons">
+          <div class="lesson"><div class="lesson-icon">▶</div><span class="lesson-title">Selector, spesifisitas & cascade</span><span class="lesson-dur">32 mnt</span></div>
+          <div class="lesson"><div class="lesson-icon">▶</div><span class="lesson-title">Box model, margin & padding</span><span class="lesson-dur">25 mnt</span></div>
+          <div class="lesson"><div class="lesson-icon">▶</div><span class="lesson-title">Flexbox lengkap — master tata letak</span><span class="lesson-dur">55 mnt</span></div>
+          <div class="lesson"><div class="lesson-icon">▶</div><span class="lesson-title">CSS Grid — layout dua dimensi</span><span class="lesson-dur">50 mnt</span></div>
+          <div class="lesson"><div class="lesson-icon">▶</div><span class="lesson-title">Responsive design & media queries</span><span class="lesson-dur">45 mnt</span></div>
+          <div class="lesson"><div class="lesson-icon">🏗️</div><span class="lesson-title">Project: Landing Page Responsif</span><span class="lesson-dur">90 mnt</span></div>
+        </div>
+      </div>
+
+      <div class="module">
+        <div class="module-header"><span class="module-title">Modul 4: JavaScript ES6+ — Interaktivitas</span><span class="module-meta">10 pelajaran · 6j 20m</span></div>
+        <div class="module-lessons">
+          <div class="lesson"><div class="lesson-icon">▶</div><span class="lesson-title">Variabel, tipe data, dan operator</span><span class="lesson-dur">30 mnt</span></div>
+          <div class="lesson"><div class="lesson-icon">▶</div><span class="lesson-title">Fungsi, arrow function & scope</span><span class="lesson-dur">38 mnt</span></div>
+          <div class="lesson"><div class="lesson-icon">▶</div><span class="lesson-title">Array & Object methods modern</span><span class="lesson-dur">45 mnt</span></div>
+          <div class="lesson"><div class="lesson-icon">▶</div><span class="lesson-title">DOM manipulation & event handling</span><span class="lesson-dur">52 mnt</span></div>
+          <div class="lesson"><div class="lesson-icon">▶</div><span class="lesson-title">Async JS: Promise & async/await</span><span class="lesson-dur">48 mnt</span></div>
+          <div class="lesson"><div class="lesson-icon">🏗️</div><span class="lesson-title">Project: Aplikasi To-Do List Interaktif</span><span class="lesson-dur">75 mnt</span></div>
+        </div>
+      </div>
+
+      <div class="module">
+        <div class="module-header"><span class="module-title">Modul 5: API & Data Dinamis</span><span class="module-meta">5 pelajaran · 3j 10m</span></div>
+        <div class="module-lessons">
+          <div class="lesson"><div class="lesson-icon">▶</div><span class="lesson-title">Fetch API & bekerja dengan JSON</span><span class="lesson-dur">40 mnt</span></div>
+          <div class="lesson"><div class="lesson-icon">▶</div><span class="lesson-title">Integrasi public API (weather, news)</span><span class="lesson-dur">55 mnt</span></div>
+          <div class="lesson"><div class="lesson-icon">🏗️</div><span class="lesson-title">Project: Aplikasi Cuaca dengan API</span><span class="lesson-dur">80 mnt</span></div>
+        </div>
+      </div>
+
+      <div class="module">
+        <div class="module-header"><span class="module-title">Modul 6: Deploy & Final Project</span><span class="module-meta">4 pelajaran · 2j 0m</span></div>
+        <div class="module-lessons">
+          <div class="lesson"><div class="lesson-icon">▶</div><span class="lesson-title">Git & GitHub untuk web developer</span><span class="lesson-dur">35 mnt</span></div>
+          <div class="lesson"><div class="lesson-icon">▶</div><span class="lesson-title">Deploy ke GitHub Pages & Netlify</span><span class="lesson-dur">25 mnt</span></div>
+          <div class="lesson"><div class="lesson-icon">🏆</div><span class="lesson-title">Final Project: Portfolio Website Pribadi</span><span class="lesson-dur">60 mnt</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- INSTRUKTUR -->
+    <div class="section-block">
+      <h2>Instruktur</h2>
+      <div class="instructor-card">
+        <div class="inst-avatar">DS</div>
+        <div>
+          <div class="inst-name">Dr. Santoso, M.Kom.</div>
+          <div class="inst-title">Dosen Teknik Informatika — Universitas Mercu Buana</div>
+          <div class="inst-stats">
+            <div class="inst-stat"><strong>★ 4.9</strong> Rating</div>
+            <div class="inst-stat"><strong>5.300+</strong> Mahasiswa</div>
+            <div class="inst-stat"><strong>4</strong> Kursus</div>
+            <div class="inst-stat"><strong>12</strong> Tahun mengajar</div>
+          </div>
+          <div class="inst-bio">Dr. Santoso adalah dosen senior di Fakultas Ilmu Komputer UMB dengan spesialisasi di bidang rekayasa perangkat lunak dan pengembangan web modern. Beliau aktif sebagai konsultan teknologi dan telah membimbing lebih dari 200 mahasiswa dalam proyek industri nyata. Gaya pengajarannya dikenal praktis, terstruktur, dan mudah dipahami pemula sekalipun.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ULASAN -->
+    <div class="section-block">
+      <h2>Ulasan Mahasiswa</h2>
+      <div class="review-summary">
+        <div class="big-rating">
+          <div class="big-num">4.9</div>
+          <div class="big-stars">★★★★★</div>
+          <div class="big-label">Rating kursus</div>
+        </div>
+        <div class="bars">
+          <div class="bar-row"><span class="bar-label">5 ★</span><div class="bar-track"><div class="bar-fill" style="width:88%"></div></div><span style="font-size:12px;color:var(--gray-500)">88%</span></div>
+          <div class="bar-row"><span class="bar-label">4 ★</span><div class="bar-track"><div class="bar-fill" style="width:9%"></div></div><span style="font-size:12px;color:var(--gray-500)">9%</span></div>
+          <div class="bar-row"><span class="bar-label">3 ★</span><div class="bar-track"><div class="bar-fill" style="width:2%"></div></div><span style="font-size:12px;color:var(--gray-500)">2%</span></div>
+          <div class="bar-row"><span class="bar-label">2 ★</span><div class="bar-track"><div class="bar-fill" style="width:1%"></div></div><span style="font-size:12px;color:var(--gray-500)">1%</span></div>
+          <div class="bar-row"><span class="bar-label">1 ★</span><div class="bar-track"><div class="bar-fill" style="width:0%"></div></div><span style="font-size:12px;color:var(--gray-500)">0%</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-header"><div class="rev-avatar">AW</div><div><div class="rev-name">Andi Wijaya</div><div class="rev-date">Desember 2024</div></div></div>
+        <div class="rev-stars">★★★★★</div>
+        <div class="rev-text">Kursus terbaik yang pernah saya ikuti! Penjelasan Dr. Santoso sangat jelas dan mudah diikuti. Project-project yang diberikan sangat relevan dan membantu saya langsung bisa bikin portfolio.</div>
+      </div>
+      <div class="review-card">
+        <div class="review-header"><div class="rev-avatar" style="background:#0a3d35;color:#5DCAA5;">SR</div><div><div class="rev-name">Siti Rahma</div><div class="rev-date">November 2024</div></div></div>
+        <div class="rev-stars">★★★★★</div>
+        <div class="rev-text">Dari nol sampai bisa deploy website sendiri dalam 3 minggu! Materi sangat terstruktur, dan saya suka bagaimana setiap modul diakhiri dengan proyek nyata yang langsung bisa dimasukkan ke portfolio.</div>
+      </div>
+      <div class="review-card">
+        <div class="review-header"><div class="rev-avatar" style="background:#4a1628;color:#ED93B1;">BP</div><div><div class="rev-name">Bintang Pratama</div><div class="rev-date">Oktober 2024</div></div></div>
+        <div class="rev-stars">★★★★☆</div>
+        <div class="rev-text">Materi sangat komprehensif, sangat membantu untuk memulai karir sebagai web developer. Hanya saja saya berharap ada tambahan materi tentang React.js sebagai lanjutan. Secara keseluruhan sangat puas!</div>
+      </div>
+    </div>
+
+  </div>
+  <div><!-- right column spacer for sticky card replication --></div>
+</div>
+
+<footer>© 2025 Universitas Mercu Buana — Learning Portal. Hak cipta dilindungi.</footer>
+</body>
+</html>
